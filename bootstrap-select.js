@@ -149,7 +149,11 @@
             if (_li.length > 0) {
                 template = template.replace('__SELECTED_OPTION', _li[_selected_index]);
                 for (var i = 0; i < _li.length; i++) {
-                    _liHtml += "<li rel=" + i + ">" + _liA[i] + "</li>";
+                    // adclass to selected option
+                    if (i == _selected_index)
+                        _liHtml += "<li rel=" + i + ' class="selected-option">' + _liA[i] + "</li>";
+                    else
+                        _liHtml += "<li rel=" + i + ">" + _liA[i] + "</li>";
                 }
             }
 
@@ -194,7 +198,8 @@
                     $select.prev('select').find('option').eq(selected).prop('selected', true).attr('selected', 'selected');
                     $select.find('.filter-option').html($this.text());
                     $select.find('button').focus();
-
+                    // add class "selected-option" to clicked li
+                    $this.addClass('selected-option').siblings().removeClass('selected-option');
                     // Trigger select 'change'
                     $select.prev('select').trigger('change');
                 }
